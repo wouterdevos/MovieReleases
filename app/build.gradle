@@ -8,7 +8,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    buildToolsVersion "26.0.1"
     defaultConfig {
         applicationId "devos.wouter.moviereleases"
         minSdkVersion 14
@@ -31,8 +31,8 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     sourceSets {
-        androidTest.java.srcDirs += "src/test-common/java"
-        test.java.srcDirs += "src/test-common/java"
+        androidTest.java.srcDirs += "src/testCommon/java"
+        test.java.srcDirs += "src/testCommon/java"
     }
 }
 
@@ -41,39 +41,40 @@ dependencies {
     kapt "com.android.databinding:compiler:$android_plugin_version"
 
     // Architecture components
-    annotationProcessor "android.arch.lifecycle:compiler:${archVersion}"
-    annotationProcessor "android.arch.persistence.room:compiler:${archVersion}"
-    compile "android.arch.lifecycle:runtime:${archVersion}"
-    compile "android.arch.lifecycle:extensions:${archVersion}"
-    compile "android.arch.persistence.room:runtime:${archVersion}"
+    kapt "android.arch.lifecycle:compiler:${archVersion}"
+    kapt "android.arch.persistence.room:compiler:${archVersion}"
+    implementation "android.arch.lifecycle:runtime:${archVersion}"
+    implementation "android.arch.lifecycle:extensions:${archVersion}"
+    implementation "android.arch.persistence.room:runtime:${archVersion}"
 
     // Support library
-    compile "com.android.support:support-v4:${supportLibVersion}"
-    compile "com.android.support:appcompat-v7:${supportLibVersion}"
-    compile "com.android.support:design:${supportLibVersion}"
+    implementation "com.android.support:support-v4:${supportLibVersion}"
+    implementation "com.android.support:appcompat-v7:${supportLibVersion}"
+    implementation "com.android.support:design:${supportLibVersion}"
 
     // Retrofit and OkHttp
-    compile 'com.google.code.gson:gson:2.8.0'
-    compile "com.squareup.retrofit2:retrofit:${retrofitVersion}"
-    compile "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
-    compile "com.squareup.okhttp3:okhttp:${okHttpVersion}"
+    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    implementation "com.squareup.okhttp3:okhttp:${okHttpVersion}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}"
 
     // Glide
-    annotationProcessor "com.github.bumptech.glide:compiler:${glideVersion}"
-    compile "com.github.bumptech.glide:glide:${glideVersion}"
+    kapt "com.github.bumptech.glide:compiler:${glideVersion}"
+    implementation "com.github.bumptech.glide:glide:${glideVersion}"
 
     // Testing
-    androidTestAnnotationProcessor "android.arch.persistence.room:compiler:${archVersion}"
-    androidTestCompile "android.arch.persistence.room:testing:${archVersion}"
-    androidTestCompile "android.arch.persistence.room:runtime:${archVersion}"
-    androidTestCompile 'junit:junit:4.12'
-    androidTestCompile "com.android.support:support-annotations:${supportLibVersion}"
-    androidTestCompile "com.android.support.test:runner:${testSupportLibVersion}"
-    androidTestCompile "com.android.support.test:rules:${testSupportLibVersion}"
-    androidTestCompile "org.hamcrest:hamcrest-library:1.3"
-    androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.0', {
+    kaptAndroidTest "android.arch.persistence.room:compiler:${archVersion}"
+    androidTestImplementation "android.arch.persistence.room:testing:${archVersion}"
+    androidTestImplementation "android.arch.persistence.room:runtime:${archVersion}"
+    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation "com.android.support:support-annotations:${supportLibVersion}"
+    androidTestImplementation "com.android.support.test:runner:${testSupportLibVersion}"
+    androidTestImplementation "com.android.support.test:rules:${testSupportLibVersion}"
+    androidTestImplementation "org.hamcrest:hamcrest-library:1.3"
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 }
