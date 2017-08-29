@@ -7,9 +7,9 @@ import devos.wouter.moviereleases.model.Movie
 
 class MovieRepo(val movieDao: MovieDao) {
 
-    fun getMovies(androidViewModel: AndroidViewModel): LiveData<List<Movie>> {
-        movieDao.getMovies().observe(androidViewModel., movies -> {
-
-        })
-    }
+//    fun getMovies(androidViewModel: AndroidViewModel): LiveData<List<Movie>> {
+//        movieDao.getMovies().observe(androidViewModel., movies -> {
+//
+//        })
+//    }
 }
